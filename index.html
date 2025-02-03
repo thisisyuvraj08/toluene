@@ -3,133 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Sweet Surprise</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <title>For My Love 💖</title>
     <style>
         body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: white;
+            overflow: hidden;
             margin: 0;
             padding: 0;
-            background-color: #fce4f1;
-            font-family: 'Pacifico', cursive;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/purty-wood.png');
-            background-size: cover;
             flex-direction: column;
-            text-align: center;
         }
         h1 {
-            color: #f50057;
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-top: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         }
         .buttons {
-            display: flex;
-            justify-content: space-around;  /* Adjusted to ensure no overlap */
-            gap: 30px;
-            width: 100%;
-            margin-bottom: 30px;
+            margin-top: 20px;
+            position: relative;
         }
-        .button {
-            padding: 20px 30px;
-            font-size: 1.5em;
-            background-color: #ff4081;
+        button {
+            padding: 15px 25px;
+            font-size: 1.2em;
             border: none;
-            border-radius: 15px;
-            color: white;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: 0.3s;
+            position: absolute;
         }
-        .button:hover {
-            background-color: #f50057;
+        #yes {
+            background: #ff4f81;
+            color: white;
+            left: 50px;
+        }
+        #no {
+            background: white;
+            color: #ff4f81;
+            left: 200px;
+        }
+        #message {
+            display: none;
+            font-size: 1.5em;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
         }
         .flower {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background-image: url('https://www.pngkit.com/png/full/245-2451613_floral-pattern-png-transparent-flower-clipart.png');
-            background-size: contain;
-            animation: flowerAnimation 10s infinite;
+            font-size: 25px;
+            animation: float 5s infinite;
         }
-        @keyframes flowerAnimation {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(100px, 50px); }
-            50% { transform: translate(200px, 0); }
-            75% { transform: translate(100px, -50px); }
-            100% { transform: translate(0, 0); }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh); opacity: 0; }
         }
-        #no {
-            position: relative;
-            margin-left: 0;
-        }
-        #yes {
-            position: relative;
-            margin-right: 0;
-        }
-        #message {
-            font-size: 2em;
-            color: #ff4081;
+        .music-controls {
             margin-top: 20px;
-            display: none; /* Hide the message initially */
         }
-        .flower:nth-child(2) {
-            animation-delay: 2s;
+        .music-controls button {
+            font-size: 1em;
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            background: #fff;
+            color: #ff4f81;
+            border-radius: 15px;
+            cursor: pointer;
         }
-        .flower:nth-child(3) {
-            animation-delay: 4s;
-        }
-        .flower:nth-child(4) {
-            animation-delay: 6s;
+        .music-controls button:hover {
+            background: #ff4f81;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <h1>Click Yes, My Love!</h1>
+
+    <h1>Hey My Love! 💖</h1>
+    <p>Click the buttons below, and let's see how much you care! 💕</p>
+    
     <div class="buttons">
-        <button class="button" id="no">No</button>
-        <button class="button" id="yes">Yes</button>
+        <button id="yes" onclick="showMessage()">Yes 😍</button>
+        <button id="no" onmouseover="moveButton()">No 😜</button>
     </div>
-    <div class="flower"></div>
-    <div class="flower"></div>
-    <div class="flower"></div>
-    <div id="message">Yay! You clicked Yes ❤️</div>
-    <audio id="background-music">
-        <source src="https://thisisyuvraj08.github.io/toluene/assets/background-music.mp3" type="audio/mp3">
+
+    <div id="message">💖 Yay! I knew you'd say YES! You’re the best thing in my life. Love you forever! 😘💕</div>
+
+    <div class="music-controls">
+        <button onclick="playMusic()">🎶 Play Music</button>
+        <button onclick="pauseMusic()">⏸ Pause Music</button>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="https://raw.githubusercontent.com/thisisyuvraj08/toluene/main/background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
     </audio>
 
     <script>
-        const noButton = document.getElementById("no");
-        const yesButton = document.getElementById("yes");
-        const audio = document.getElementById("background-music");
-        const message = document.getElementById("message");
+        // Show the message when "Yes" is clicked
+        function showMessage() {
+            document.getElementById("message").style.display = "block";
+            document.getElementById("yes").style.display = "none";
+            document.getElementById("no").style.display = "none";
+        }
 
-        // Start music on user interaction (important for mobile)
-        document.body.addEventListener("click", () => {
-            if (audio.paused) {
-                audio.play(); // Start the music when the user clicks anywhere on the page
-            }
-        });
+        // Move the "No" button when hovered
+        function moveButton() {
+            let button = document.getElementById("no");
+            let x = Math.random() * (window.innerWidth - 150);
+            let y = Math.random() * (window.innerHeight - 100);
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
 
-        // Handle "No" button click
-        noButton.addEventListener("click", () => {
-            const maxX = window.innerWidth - noButton.offsetWidth;
-            const maxY = window.innerHeight - noButton.offsetHeight;
+        // Music controls
+        let music = document.getElementById("bg-music");
 
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
+        function playMusic() {
+            music.play();
+        }
 
-            noButton.style.left = `${randomX}px`;
-            noButton.style.top = `${randomY}px`;
-        });
+        function pauseMusic() {
+            music.pause();
+        }
 
-        // Handle "Yes" button click and show the message
-        yesButton.addEventListener("click", () => {
-            message.style.display = "block"; // Show the message
-            message.textContent = "Yay! You clicked Yes ❤️"; // Customize the message if needed
-        });
+        // Flower animation creation
+        function createFlower() {
+            const flower = document.createElement("div");
+            flower.classList.add("flower");
+            const flowerIcons = ["🌸", "🌺", "🌼", "💐"];
+            flower.innerHTML = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+            document.body.appendChild(flower);
+
+            const size = Math.random() * 25 + 15 + "px";
+            flower.style.left = Math.random() * 100 + "vw";
+            flower.style.fontSize = size;
+            flower.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+            setTimeout(() => {
+                flower.remove();
+            }, 6000);
+        }
+
+        // Create flowers every 700ms
+        setInterval(createFlower, 700);
+
     </script>
+
 </body>
 </html>
