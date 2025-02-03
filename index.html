@@ -28,8 +28,9 @@
         }
         .buttons {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;  /* Adjusted to ensure no overlap */
             gap: 30px;
+            width: 100%;
             margin-bottom: 30px;
         }
         .button {
@@ -61,15 +62,12 @@
             100% { transform: translate(0, 0); }
         }
         #no {
-            position: absolute;
-            left: 25%;
-            top: 60%;
+            position: relative;
+            margin-left: 0;
         }
         #yes {
-            position: absolute;
-            left: 50%;
-            top: 60%;
-            transform: translateX(-50%);
+            position: relative;
+            margin-right: 0;
         }
         #message {
             font-size: 2em;
