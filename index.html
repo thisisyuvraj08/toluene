@@ -18,9 +18,7 @@
             overflow: hidden;
             background-image: url('https://www.transparenttextures.com/patterns/purty-wood.png');
             background-size: cover;
-        }
-        .container {
-            position: relative;
+            flex-direction: column;
             text-align: center;
         }
         h1 {
@@ -31,7 +29,8 @@
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
+            margin-bottom: 30px;
         }
         .button {
             padding: 20px 30px;
@@ -63,7 +62,7 @@
         }
         #no {
             position: absolute;
-            left: 30%;
+            left: 25%;
             top: 60%;
         }
         #yes {
@@ -72,32 +71,49 @@
             top: 60%;
             transform: translateX(-50%);
         }
+        #message {
+            font-size: 2em;
+            color: #ff4081;
+            margin-top: 20px;
+            display: none; /* Hide the message initially */
+        }
+        .flower:nth-child(2) {
+            animation-delay: 2s;
+        }
+        .flower:nth-child(3) {
+            animation-delay: 4s;
+        }
+        .flower:nth-child(4) {
+            animation-delay: 6s;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Click Yes, My Love!</h1>
-        <div class="buttons">
-            <button class="button" id="no">No</button>
-            <button class="button" id="yes">Yes</button>
-        </div>
-        <div class="flower"></div>
-        <div class="flower" style="animation-delay: 2s;"></div>
-        <div class="flower" style="animation-delay: 4s;"></div>
-        <audio id="background-music" autoplay loop>
-            <source src="https://thisisyuvraj08.github.io/toluene/assets/background-music.mp3" type="audio/mp3">
-        </audio>
+    <h1>Click Yes, My Love!</h1>
+    <div class="buttons">
+        <button class="button" id="no">No</button>
+        <button class="button" id="yes">Yes</button>
     </div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div id="message">Yay! You clicked Yes ❤️</div>
+    <audio id="background-music">
+        <source src="https://thisisyuvraj08.github.io/toluene/assets/background-music.mp3" type="audio/mp3">
+    </audio>
 
     <script>
         const noButton = document.getElementById("no");
         const yesButton = document.getElementById("yes");
         const audio = document.getElementById("background-music");
+        const message = document.getElementById("message");
 
-        // Change music track
-        function changeMusic() {
-            audio.src = "new-music-file.mp3"; // Replace with your chosen track URL
-        }
+        // Start music on user interaction (important for mobile)
+        document.body.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play(); // Start the music when the user clicks anywhere on the page
+            }
+        });
 
         // Handle "No" button click
         noButton.addEventListener("click", () => {
@@ -111,13 +127,11 @@
             noButton.style.top = `${randomY}px`;
         });
 
-        // Handle "Yes" button click
+        // Handle "Yes" button click and show the message
         yesButton.addEventListener("click", () => {
-            alert("Yay! You clicked Yes ❤️");
+            message.style.display = "block"; // Show the message
+            message.textContent = "Yay! You clicked Yes ❤️"; // Customize the message if needed
         });
-
-        // Change flower color animation or background music dynamically if needed
-        // changeMusic(); // Uncomment to change the music on load
     </script>
 </body>
 </html>
