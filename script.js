@@ -6,14 +6,19 @@ messages.forEach((message, index) => {
   message.style.animationDuration = `${Math.random() * 3 + 2}s`;
 });
 
+// List of flower emojis
+const flowerEmojis = ["🌸", "🌺", "🌼", "🌻", "🌷", "💐", "🥀", "🌹"];
+
 // Floating flowers
 const flowersContainer = document.querySelector('.flowers');
 for (let i = 0; i < 20; i++) {
   const flower = document.createElement('div');
   flower.classList.add('flower');
+  flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)]; // Random flower emoji
   flower.style.left = `${Math.random() * 100}%`;
   flower.style.top = `${Math.random() * 100}%`;
   flower.style.animationDuration = `${Math.random() * 4 + 3}s`;
+  flower.style.fontSize = `${Math.random() * 2 + 1.5}rem`; // Random size for variety
   flowersContainer.appendChild(flower);
 }
 
