@@ -1,90 +1,37 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  overflow: hidden;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// Floating messages
+const messages = document.querySelectorAll('.message');
+messages.forEach((message, index) => {
+  message.style.left = `${Math.random() * 100}%`;
+  message.style.top = `${Math.random() * 100}%`;
+  message.style.animationDuration = `${Math.random() * 3 + 2}s`;
+});
+
+// List of flower emojis
+const flowerEmojis = ["🌸", "🌺", "🌼", "🌻", "🌷", "💐", "🥀", "🌹"];
+
+// Floating flowers
+const flowersContainer = document.querySelector('.flowers');
+for (let i = 0; i < 20; i++) {
+  const flower = document.createElement('div');
+  flower.classList.add('flower');
+  flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)]; // Random flower emoji
+  flower.style.left = `${Math.random() * 100}%`;
+  flower.style.top = `${Math.random() * 100}%`;
+  flower.style.animationDuration = `${Math.random() * 4 + 3}s`;
+  flower.style.fontSize = `${Math.random() * 2 + 1.5}rem`; // Random size for variety
+  flowersContainer.appendChild(flower);
 }
 
-.container {
-  text-align: center;
-  color: #fff;
-}
+// No button movement
+const noButton = document.getElementById('no-btn');
+noButton.addEventListener('click', () => {
+  const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+  noButton.style.position = 'absolute';
+  noButton.style.left = `${x}px`;
+  noButton.style.top = `${y}px`;
+});
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.messages {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.message {
-  position: absolute;
-  font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.8);
-  animation: float 5s infinite ease-in-out;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.flowers {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.flower {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background: url('assets/flower.png') no-repeat center/cover;
-  animation: float 6s infinite ease-in-out;
-}
-
-.question {
-  margin-top: 20px;
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 10px;
-}
-
-#yes-btn {
-  background: #4caf50;
-  color: #fff;
-}
-
-#no-btn {
-  background: #f44336;
-  color: #fff;
-}
+// Play background music
+const music = document.getElementById('background-music');
+music.play();
