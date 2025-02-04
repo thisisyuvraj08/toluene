@@ -13,55 +13,52 @@
             overflow: hidden;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
         }
         h1 {
             font-size: 2.5em;
             margin-top: 50px;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         }
-        .buttons {
+        .message-box {
             margin-top: 20px;
-            position: relative;
-        }
-        button {
-            padding: 15px 25px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            position: absolute;
-        }
-        #yes {
-            background: #ff4f81;
-            color: white;
-            left: 50px;
-            z-index: 1;
-        }
-        #no {
-            background: white;
-            color: #ff4f81;
-            left: 200px;
-            z-index: 1;
-        }
-        #message {
-            display: none;
             font-size: 1.5em;
-            margin-top: 20px;
             padding: 20px;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.2);
+            display: none;
+            transition: 0.5s;
         }
-        .flower {
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: relative;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            background: white;
+            color: #ff4f81;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff4f81;
+            color: white;
+        }
+        #no {
             position: absolute;
-            font-size: 25px;
+            left: 60%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+        .heart, .flower {
+            position: absolute;
+            font-size: 20px;
             animation: float 5s infinite;
-            z-index: 2; /* Ensure flowers are above other content */
         }
         @keyframes float {
             0% { transform: translateY(0); opacity: 1; }
@@ -88,16 +85,17 @@
     </style>
 </head>
 <body>
-
     <h1>Hey My Love! 💖</h1>
-    <p>Click the buttons below, and let's see how much you care! 💕</p>
+    <p>Do you love me? 😊</p>
     
     <div class="buttons">
-        <button id="yes" onclick="showMessage()">Yes 😍</button>
-        <button id="no" onmouseover="moveButton()">No 😜</button>
+        <button id="yes" onclick="showMessage()">Yes 💕</button>
+        <button id="no">No 💔</button>
     </div>
 
-    <div id="message">💖 Yay! I knew you'd say YES! You’re the best thing in my life. Love you forever! 😘💕</div>
+    <div class="message-box" id="message">
+        💕 Yay! You made my day! I love you endlessly! 💕
+    </div>
 
     <div class="music-controls">
         <button onclick="playMusic()">🎶 Play Music</button>
@@ -105,39 +103,40 @@
     </div>
 
     <audio id="background-music" loop>
-        <source src="https://raw.githubusercontent.com/thisisyuvraj08/toluene/main/background-music.mp3" type="audio/mpeg">
+        <source src=https://raw.githubusercontent.com/thisisyuvraj08/toluene/main/assets/background-music.mp3 type="audio/mpeg">
         Your browser does not support the audio tag.
     </audio>
 
     <script>
-        // Show the message when "Yes" is clicked
         function showMessage() {
-            document.getElementById("message").style.display = "block";
-            document.getElementById("yes").style.display = "none";
-            document.getElementById("no").style.display = "none";
+            document.getElementById('message').style.display = 'block';
+            playMusic();
         }
 
-        // Move the "No" button when hovered
-        function moveButton() {
-            let button = document.getElementById("no");
-            let x = Math.random() * (window.innerWidth - 150);
-            let y = Math.random() * (window.innerHeight - 100);
-            button.style.left = x + "px";
-            button.style.top = y + "px";
+        const noButton = document.getElementById("no");
+        noButton.addEventListener("mouseover", function() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noButton.style.left = `${Math.max(0, Math.min(x, window.innerWidth - 100))}px`;
+            noButton.style.top = `${Math.max(0, Math.min(y, window.innerHeight - 50))}px`;
+        });
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            document.body.appendChild(heart);
+
+            const size = Math.random() * 20 + 10 + "px";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = size;
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
         }
 
-        // Music controls
-        let music = document.getElementById("bg-music");
-
-        function playMusic() {
-            music.play();
-        }
-
-        function pauseMusic() {
-            music.pause();
-        }
-
-        // Flower animation creation
         function createFlower() {
             const flower = document.createElement("div");
             flower.classList.add("flower");
@@ -155,10 +154,20 @@
             }, 6000);
         }
 
-        // Create flowers every 700ms
+        setInterval(createHeart, 500);
         setInterval(createFlower, 700);
 
-    </script>
+        // Music controls
+        let music = document.getElementById("bg-music");
 
+        function playMusic() {
+            music.play();
+        }
+
+        function pauseMusic() {
+            music.pause();
+        }
+    </script>
 </body>
 </html>
+
