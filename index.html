@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For MAHI ma’am💖</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: white;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-top: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .message-box {
+            margin-top: 20px;
+            font-size: 1.5em;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            display: none;
+            transition: 0.5s;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            position: relative;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            background: white;
+            color: #ff4f81;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff4f81;
+            color: white;
+        }
+        #no {
+            position: absolute;
+            left: 60%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+        .heart, .flower {
+            position: absolute;
+            font-size: 20px;
+            animation: float 5s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .music-controls {
+            margin-top: 20px;
+        }
+        .music-controls button {
+            font-size: 1em;
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            background: #fff;
+            color: #ff4f81;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .music-controls button:hover {
+            background: #ff4f81;
+            color: white;
+        }
+        /* Floating Images */
+        .floating-image {
+            position: absolute;
+            width: 50px; /* Adjust size */
+            height: auto;
+            animation: float 6s infinite alternate ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>you are the girl of my dreams ma'am! 💖</h1>
+    <p>will you come to DRDO again pleaseee? 😊</p>
+    
+    <div class="buttons">
+        <button id="yes" onclick="showMessage()">Yes 💕</button>
+        <button id="no">No 💔</button>
+    </div>
+
+    <div class="message-box" id="message">
+        💕 Yay! You made my day! mai tujhe kya batau ki tu kitni jyada important hai mere liye
+yar tu ek to itni cute and adorable hai na ki tujhpe gussa bhi ata hai to thodi der me gayab ho jata hai
+ek bar tu dekhle ankho me to bc sabkuch idhar se udhar ho jata hai mere man me ! 💕
+    </div>
+
+    <div class="music-controls">
+        <button onclick="playMusic()">🎶 Play Music</button>
+        <button onclick="pauseMusic()">⏸ Pause Music</button>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="https://raw.githubusercontent.com/thisisyuvraj08/toluene/main/assets/background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <!-- Floating Images -->
+    <img src="https://github.com/thisisyuvraj08/toluene/raw/main/assets/image1.jpg" class="floating-image" id="img1">
+    <img src="https://github.com/thisisyuvraj08/toluene/raw/main/assets/image2.jpg" class="floating-image" id="img2">
+    <img src="https://github.com/thisisyuvraj08/toluene/raw/main/assets/image3.jpg" class="floating-image" id="img3">
+    <img src="https://github.com/thisisyuvraj08/toluene/raw/main/assets/image4.jpg" class="floating-image" id="img4">
+
+    <script>
+        function showMessage() {
+            document.getElementById('message').style.display = 'block';
+            playMusic();
+        }
+
+        const noButton = document.getElementById("no");
+        noButton.addEventListener("mouseover", function() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noButton.style.left = `${Math.max(0, Math.min(x, window.innerWidth - 100))}px`;
+            noButton.style.top = `${Math.max(0, Math.min(y, window.innerHeight - 50))}px`;
+        });
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            document.body.appendChild(heart);
+
+            const size = Math.random() * 20 + 10 + "px";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = size;
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function createFlower() {
+            const flower = document.createElement("div");
+            flower.classList.add("flower");
+            const flowerIcons = ["🌸", "🌺", "🌼", "💐"];
+            flower.innerHTML = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+            document.body.appendChild(flower);
+
+            const size = Math.random() * 25 + 15 + "px";
+            flower.style.left = Math.random() * 100 + "vw";
+            flower.style.fontSize = size;
+            flower.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+            setTimeout(() => {
+                flower.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 500);
+        setInterval(createFlower, 700);
+
+        // Music controls
+        let music = document.getElementById("bg-music");
+
+        function playMusic() {
+            music.play();
+        }
+
+        function pauseMusic() {
+            music.pause();
+        }
+
+        // Floating Images Animation
+        function randomPosition(image) {
+            let x = Math.random() * (window.innerWidth - 100); 
+            let y = Math.random() * (window.innerHeight - 100);
+            image.style.left = `${x}px`;
+            image.style.top = `${y}px`;
+        }
+
+        function updateFloatingImages() {
+            let images = document.querySelectorAll('.floating-image');
+            images.forEach(img => {
+                randomPosition(img);
+            });
+        }
+
+        updateFloatingImages();
+        setInterval(updateFloatingImages, 5000);
+    </script>
+</body>
+</html>
